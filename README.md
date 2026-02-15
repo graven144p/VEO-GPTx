@@ -1,6 +1,6 @@
 # VEO-GPTx
 
-![VEO-GPTx Logo](https://i.postimg.cc/jdgcshH3/logo.webp))
+![VEO-GPTx Logo](https://i.postimg.cc/jdgcshH3/logo.webp)
 
 
 
@@ -37,7 +37,6 @@ Verify installation:
 python3 --version
 
 3. Install Dependencies
-pip install -r requirements.txt
 pip install openai
 
 4. Configure OpenAI API Key
