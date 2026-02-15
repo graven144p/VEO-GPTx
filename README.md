@@ -52,10 +52,13 @@ After running VEO-GPTx in your terminal, you can interact with it like this:
 > hello
 VEO-GPTx: Hi there! How can I assist you today?
 
-#VEO-GPTx
 
-![VEO-GPTx Logo](https://i.postimg.cc/jjQZrYMT/Untitled.png)
 
+## VEO-GPTx Screenshot
+
+Here’s a preview of VEO-GPTx running in the terminal (offline mode):
+
+![VEO-GPTx Terminal Screenshot](https://i.postimg.cc/jjQZrYMT/Untitled.png)
 
 
 
