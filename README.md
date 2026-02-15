@@ -39,6 +39,13 @@ python3 --version
 3. Install Dependencies
 curl -fsSL https://ollama.com/install.sh | sh
 
+ollama pull mistral
+
+ollama pull llama3
+
+
+
+
 5. Run VEO-GPTx
 ~/python3/bin/python3 /home/user/VEO-GPTx.py
 
