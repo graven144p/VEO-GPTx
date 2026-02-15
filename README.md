@@ -59,4 +59,3 @@ Run VEO-GPTx
 ~/python3/bin/python3 /home/user/VEO-GPTx.py
 
 
-~/python3/bin/python3 /home/user/VEO-GPTx.py
