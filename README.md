@@ -10,7 +10,7 @@ VEO-GPTx is a personalized AI assistant designed to run directly in a Linux term
 
 ## **Fallback System (Offline Mode)**
 
-The fallback mechanism allows VEO-GPTx to **continue functioning even if the OpenAI API is unreachable**. Instead of stopping, it uses:
+The fallback mechanism allows VEO-GPTx to **continue functioning even if the ollama API is unreachable**. Instead of stopping, it uses:
 
 - Local tools and scripts  
 - Preloaded prompts  
