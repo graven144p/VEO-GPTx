@@ -52,7 +52,7 @@ After running VEO-GPTx in your terminal, you can interact with it like this:
 > hello
 VEO-GPTx: Hi there! How can I assist you today?
 
-![VEO-GPTx Logo](https://postimg.cc/XZqwwmM1)
+![VEO-GPTx Logo](https://i.postimg.cc/jjQZrYMT/Untitled.png)
 
 
 
