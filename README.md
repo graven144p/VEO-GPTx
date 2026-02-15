@@ -4,7 +4,7 @@
 
 
 
-VEO-GPTx is a personalized AI assistant designed to run directly in a Linux terminal, leveraging the OpenAI API for real-time interaction. It emphasizes **simplicity, speed, and flexibility**, making it ideal for developers, system administrators, and tech enthusiasts who want AI support without leaving the command line.  
+VEO-GPTx is a personalized AI assistant designed to run directly in a Linux terminal, leveraging the ollama API for real-time interaction. It emphasizes **simplicity, speed, and flexibility**, making it ideal for developers, system administrators, and tech enthusiasts who want AI support without leaving the command line.  
 
 ---
 
@@ -37,11 +37,7 @@ Verify installation:
 python3 --version
 
 3. Install Dependencies
-pip install openai
-
-4. Configure OpenAI API Key
-import openai
-openai.api_key = "YOUR_OPENAI_API_KEY"
+curl -fsSL https://ollama.com/install.sh | sh
 
 5. Run VEO-GPTx
 ~/python3/bin/python3 /home/user/VEO-GPTx.py
