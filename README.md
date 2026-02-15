@@ -1,6 +1,6 @@
 # VEO-GPTx
 
-![VEO-GPTx Logo](![VEO-GPTx Logo](https://i.postimg.cc/Xp5dLdD9/logo.png)
+![VEO-GPTx Logo](![VEO-GPTx Logo](https://i.postimg.cc/Xp5dLdD9/logo.png))
 
 
 
