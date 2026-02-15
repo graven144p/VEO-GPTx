@@ -8,6 +8,7 @@ import json
 import ast
 import operator
 import threading
+import requests
 from datetime import datetime
 
 # -------------------------------
@@ -29,8 +30,31 @@ banner = r"""
 
                                                      VEO-GPTx
 """
+
+# -------------------------------
+# Ollama Configuration
+# -------------------------------
+OLLAMA_TAGS_URL = "http://localhost:11434/api/tags"
+OLLAMA_GENERATE_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "llama3"
+
+def ollama_running():
+    try:
+        r = requests.get(OLLAMA_TAGS_URL, timeout=3)
+        return r.status_code == 200
+    except:
+        return False
+
+OLLAMA_AVAILABLE = ollama_running()
+
 current_date = datetime.now().strftime('%A, %B %d, %Y')
-startup_status = f"OpenAI unavailable. Running offline mode only.\nMemory loaded. {current_date}\n"
+
+if OLLAMA_AVAILABLE:
+    model_status = f"Ollama detected. Model: {OLLAMA_MODEL}"
+else:
+    model_status = "Ollama not detected. Running offline brain only."
+
+startup_status = f"{model_status}\nMemory loaded. {current_date}\n"
 
 print(banner)
 print(startup_status)
@@ -43,7 +67,7 @@ start_time = time.time()
 # -------------------------------
 # Memory Setup
 # -------------------------------
-MEMORY_DIR = "/home/user/VEO-GPTx/Memory"
+MEMORY_DIR = os.path.expanduser("~/VEO-GPTx/Memory")
 MEMORY_FILE = os.path.join(MEMORY_DIR, "veo_memory.json")
 os.makedirs(MEMORY_DIR, exist_ok=True)
 
@@ -56,7 +80,7 @@ if os.path.exists(MEMORY_FILE):
     try:
         with open(MEMORY_FILE, "r") as f:
             memory = json.load(f)
-    except Exception:
+    except:
         memory = preload_memory.copy()
 else:
     memory = preload_memory.copy()
@@ -113,77 +137,83 @@ def safe_eval(expr):
     return eval_node(tree.body)
 
 # -------------------------------
-# Offline Brain (SMART UPGRADE)
+# Ollama Streaming Brain
+# -------------------------------
+def ask_ollama(prompt):
+    if not OLLAMA_AVAILABLE:
+        return None
+
+    try:
+        conversation_context = ""
+        for mem in memory[-5:]:
+            conversation_context += f"User: {mem['user']}\nAssistant: {mem['assistant']}\n"
+
+        full_prompt = conversation_context + f"User: {prompt}\nAssistant:"
+
+        payload = {
+            "model": OLLAMA_MODEL,
+            "prompt": full_prompt,
+            "stream": True
+        }
+
+        response = requests.post(OLLAMA_GENERATE_URL, json=payload, stream=True, timeout=120)
+        response.raise_for_status()
+
+        full_reply = ""
+
+        print("VEO-GPT: ", end="", flush=True)
+
+        for line in response.iter_lines():
+            if line:
+                data = json.loads(line.decode("utf-8"))
+                chunk = data.get("response", "")
+                print(chunk, end="", flush=True)
+                full_reply += chunk
+
+        print("\n")
+        return full_reply.strip()
+
+    except:
+        return None
+
+# -------------------------------
+# Offline Brain (Fallback)
 # -------------------------------
 def offline_brain(user_input):
+
+    # Try Ollama first
+    ollama_reply = ask_ollama(user_input)
+    if ollama_reply:
+        memory.append({"user": user_input, "assistant": ollama_reply})
+        save_memory()
+        return None
+
     user = normalize(user_input)
     response = ""
 
-    # --- Triggers ---
-    gratitude_triggers = ["thank you", "thanks", "thx", "ty"]
-    greeting_triggers = ["hi", "hello", "hey", "yo", "sup", "hola"]
-    how_triggers = ["how are you", "how are u", "how r u", "hows it going", "how you doing"]
-    mood_triggers = ["bored", "tired", "happy", "sad", "excited", "angry"]
-    joke_triggers = ["joke", "funny", "make me laugh"]
-    advice_triggers = ["should i", "what do you think", "what's your opinion"]
-    linux_triggers = ["linux commands", "show me linux commands", "basic linux commands", "linux tips"]
+    greeting_triggers = ["hi", "hello", "hey", "yo"]
+    gratitude_triggers = ["thank you", "thanks", "thx"]
+    joke_triggers = ["joke", "funny"]
 
-    # --- SMART MEMORY RECALL ---
-    for mem in memory[-10:]:  # look at last 10 messages
-        if user in normalize(mem["user"]):
-            response = f"As we discussed earlier: {mem['assistant']}"
-            break
+    if contains_trigger(user, greeting_triggers):
+        response = random.choice(["Hey there!", "Hello!", "Yo!"])
+    elif contains_trigger(user, gratitude_triggers):
+        response = "You’re welcome!"
+    elif contains_trigger(user, joke_triggers):
+        response = "Why do programmers prefer dark mode? Because light attracts bugs!"
+    elif re.fullmatch(r"[0-9\.\+\-\*\/\(\) ]+", user):
+        try:
+            result = safe_eval(user)
+            response = f"The result is {result}."
+        except:
+            response = "That math didn’t work."
+    elif "time" in user:
+        response = f"The current time is {datetime.now().strftime('%H:%M:%S')}."
+    elif "date" in user:
+        response = f"Today is {datetime.now().strftime('%A, %B %d, %Y')}."
+    else:
+        response = "I’m listening… tell me more."
 
-    # --- SMART RESPONSE LOGIC ---
-    if not response:
-        if contains_trigger(user, gratitude_triggers):
-            response = random.choice(["You’re welcome! 😊", "No problem!", "Anytime!"])
-        elif contains_trigger(user, how_triggers):
-            response = random.choice(["I'm doing great! How about you?", "All good here. How’s your day?", "Feeling awesome! And you?"])
-        elif "time" in user:
-            response = f"The current time is {datetime.now().strftime('%H:%M:%S')}."
-        elif "date" in user or "today" in user:
-            response = f"Today is {datetime.now().strftime('%A, %B %d, %Y')}."
-        elif re.fullmatch(r"[0-9\.\+\-\*\/\(\) ]+", user):
-            try:
-                result = safe_eval(user)
-                response = f"The result is {result}."
-            except:
-                response = "Hmm… that math didn’t work 😅"
-        elif contains_trigger(user, greeting_triggers):
-            response = random.choice(["Hey there! How’s it going?", "Hi! Nice to see you.", "Hello! How’s your day?", "Yo! What’s up?"])
-        elif contains_trigger(user, mood_triggers):
-            response = random.choice(["I see… hope you’re having a good one!", "Thanks for sharing!", "Sounds like you’ve got some energy there!"])
-        elif contains_trigger(user, joke_triggers):
-            response = random.choice([
-                "Why did the computer go to therapy? Too many bytes of stress!",
-                "I would tell you a joke about UDP… but you might not get it.",
-                "Why do programmers prefer dark mode? Because light attracts bugs!"
-            ])
-        elif contains_trigger(user, advice_triggers):
-            response = random.choice(["Hmm… I’d weigh the options carefully.", "It depends… tell me more.", "Think it through before deciding."])
-        elif contains_trigger(user, linux_triggers):
-            response = random.choice([
-                "Basic Linux commands: ls, cd, pwd, mkdir, rm, cp, mv",
-                "Tip: 'man command' shows the manual for any Linux command.",
-                "'sudo' gives admin privileges. Use wisely!"
-            ])
-        # --- COMMANDS ---
-        elif "flip a coin" in user or "/flip a coin" in user:
-            response = random.choice(["Heads", "Tails"])
-        elif "roll a dice" in user or "roll a die" in user or "/roll a dice" in user:
-            response = f"You rolled a {random.randint(1,6)}"
-        # --- Default fallback ---
-        else:
-            response = random.choice([
-                "Interesting… tell me more!",
-                "I’m listening, go on.",
-                "I see, what else is happening?",
-                "Could you explain that a bit more?",
-                "That’s intriguing, tell me more details!"
-            ])
-
-    # --- SAVE MEMORY ---
     memory.append({"user": user_input, "assistant": response})
     save_memory()
     return response
@@ -191,22 +221,20 @@ def offline_brain(user_input):
 # -------------------------------
 # Idle Thread
 # -------------------------------
-IDLE_INTERVAL = 180  # 3 minutes
+IDLE_INTERVAL = 180
 last_input_time = time.time()
 idle_shown = False
 
 def idle_loop():
     global last_input_time, idle_shown
-    idle_messages = ["Standing by.", "Idle mode active.", "Awaiting input.", "Listening..."]
+    idle_messages = ["Standing by.", "Idle mode active.", "Listening..."]
     while True:
         time.sleep(1)
-        elapsed = time.time() - last_input_time
-        if elapsed > IDLE_INTERVAL and not idle_shown:
-            type_out("VEO-GPT: " + random.choice(idle_messages))
+        if time.time() - last_input_time > IDLE_INTERVAL and not idle_shown:
+            print("VEO-GPT:", random.choice(idle_messages))
             idle_shown = True
 
-idle_thread = threading.Thread(target=idle_loop, daemon=True)
-idle_thread.start()
+threading.Thread(target=idle_loop, daemon=True).start()
 
 # -------------------------------
 # Main Loop
@@ -216,9 +244,26 @@ while True:
     last_input_time = time.time()
     idle_shown = False
 
-    if user_input.lower() in ["exit", "/exit", "quit", "/quit", "bye"]:
-        type_out("VEO-GPT: Goodbye! Talk soon 😊")
+    if user_input.lower() in ["exit", "quit", "bye"]:
+        print("VEO-GPT: Goodbye! 👋")
         break
 
+    if user_input.startswith("/status"):
+        uptime = int(time.time() - start_time)
+        brain = "Llama3 (Ollama)" if OLLAMA_AVAILABLE else "Offline Brain"
+        print(f"VEO-GPT: Brain: {brain} | Model: {OLLAMA_MODEL} | Uptime: {uptime}s")
+        continue
+
+    if user_input.startswith("/model"):
+        parts = user_input.split()
+        if len(parts) > 1:
+            OLLAMA_MODEL = parts[1]
+            print(f"VEO-GPT: Model switched to {OLLAMA_MODEL}")
+        else:
+            print(f"VEO-GPT: Current model is {OLLAMA_MODEL}")
+        continue
+
     response = offline_brain(user_input)
-    type_out("VEO-GPT: " + response)
+
+    if response:
+        type_out("VEO-GPT: " + response)
