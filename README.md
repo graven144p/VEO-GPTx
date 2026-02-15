@@ -41,6 +41,8 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 
 ollama pull llama3
+ollama pull llama3:8b-instruct-q4_K_M
+
 
 ollama run llama3
 
