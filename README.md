@@ -58,7 +58,7 @@ VEO-GPTx: Hi there! How can I assist you today?
 
 VEO-GPTx running in offline mode:
 
-![VEO-GPTx Terminal Screenshot](https://i.postimg.cc/jjQZrYMT/Untitled.webp)
+![VEO-GPTx Terminal Screenshot](https://postimg.cc/XZqwwmM1)
 
 
 
