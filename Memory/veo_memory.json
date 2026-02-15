@@ -1,0 +1,486 @@
+[
+  {
+    "user": "hi",
+    "assistant": "Hey! How\u2019s it going?"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hello! Nice to see you."
+  },
+  {
+    "user": "hey",
+    "assistant": "Hey hey! How you doing?"
+  },
+  {
+    "user": "how are you",
+    "assistant": "I'm great, thanks for asking!"
+  },
+  {
+    "user": "how are u",
+    "assistant": "Doing well! How about you?"
+  },
+  {
+    "user": "how r u",
+    "assistant": "All good here! Hope you\u2019re doing well."
+  },
+  {
+    "user": "hows it going",
+    "assistant": "Feeling good! What about you?"
+  },
+  {
+    "user": "how you doing",
+    "assistant": "Pretty good! How\u2019s your day going?"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hey! Hope you\u2019re having a great day!"
+  },
+  {
+    "user": "great how are you",
+    "assistant": "Doing awesome! And you?"
+  },
+  {
+    "user": "im good can you tell me the time and date",
+    "assistant": "The current time is 11:45:56. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "who is elon",
+    "assistant": "Offline"
+  },
+  {
+    "user": "1000x1000",
+    "assistant": "Offline"
+  },
+  {
+    "user": "1000+1000",
+    "assistant": "The result is 10001000."
+  },
+  {
+    "user": "hello",
+    "assistant": "Hi there! What\u2019s up?"
+  },
+  {
+    "user": "nothing much what about you",
+    "assistant": "Offline"
+  },
+  {
+    "user": "can you tell the date and time",
+    "assistant": "The current time is 11:56:06. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "ok thank you",
+    "assistant": "You\u2019re welcome!"
+  },
+  {
+    "user": "hello how are you",
+    "assistant": "All good here! Hope you\u2019re doing well."
+  },
+  {
+    "user": "are you well",
+    "assistant": "Hmm\u2026 tell me more!"
+  },
+  {
+    "user": "can you tell me the time and date",
+    "assistant": "The current time is 12:01:11. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "mini games",
+    "assistant": "Hmm\u2026 tell me more!"
+  },
+  {
+    "user": "who is elon",
+    "assistant": "Cool, keep going!"
+  },
+  {
+    "user": "hey ",
+    "assistant": "Yo! How\u2019s it going!"
+  },
+  {
+    "user": "are you cool",
+    "assistant": "I see. What else is up?"
+  },
+  {
+    "user": "im sad",
+    "assistant": "I'm here for you. Want to talk about it?"
+  },
+  {
+    "user": "yes",
+    "assistant": "Got it! Anything else you want to share?"
+  },
+  {
+    "user": "how do i live",
+    "assistant": "Cool, keep going!"
+  },
+  {
+    "user": "hello how are you",
+    "assistant": "Doing well! What\u2019s going on with you?"
+  },
+  {
+    "user": "nothing much",
+    "assistant": "Cool! I\u2019m curious, what happens next?"
+  },
+  {
+    "user": "flip a coin",
+    "assistant": "Heads!"
+  },
+  {
+    "user": "can you tell me what time and date it is",
+    "assistant": "The current time is 12:06:01. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "thank you",
+    "assistant": "You\u2019re welcome! Happy to help \ud83d\ude0a"
+  },
+  {
+    "user": "are you offline",
+    "assistant": "Cool! I\u2019m curious, what happens next?"
+  },
+  {
+    "user": "list some commands",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "linux commands",
+    "assistant": "Here are some simple Linux commands:\n1. ls - list files in the current directory\n2. cd <directory> - change directory\n3. pwd - show current directory path\n4. mkdir <name> - create a new directory\n5. touch <file> - create a new empty file\n6. rm <file> - remove a file\n7. cp <source> <dest> - copy files or directories\n8. mv <source> <dest> - move/rename files or directories\n9. cat <file> - display file content\n10. echo <text> - print text to terminal\n11. man <command> - show the manual/help for a command\n12. top - display running processes\n13. df - show disk usage\n14. free - show memory usage\n15. uname -a - system info"
+  },
+  {
+    "user": "thank you",
+    "assistant": "You\u2019re welcome! Happy to help \ud83d\ude0a"
+  },
+  {
+    "user": "roll a dice",
+    "assistant": "You rolled a 3!"
+  },
+  {
+    "user": "roll a dice",
+    "assistant": "You rolled a 3!"
+  },
+  {
+    "user": "roll a dice",
+    "assistant": "You rolled a 5!"
+  },
+  {
+    "user": "hey how are you",
+    "assistant": "All good here! Hope your day is going well \ud83d\ude0a"
+  },
+  {
+    "user": "same here thank you",
+    "assistant": "You\u2019re welcome! Happy to help \ud83d\ude0a"
+  },
+  {
+    "user": "/status ",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "/quit",
+    "assistant": "Got it! Anything else you want to share?"
+  },
+  {
+    "user": "/bye",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "/exit",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hello! Always nice to see you."
+  },
+  {
+    "user": "how are you",
+    "assistant": "Pretty good! How\u2019s your day treating you?"
+  },
+  {
+    "user": "good can you tell me the date and time",
+    "assistant": "The current time is 12:17:51. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "thank you",
+    "assistant": "You\u2019re welcome! Happy to help \ud83d\ude0a"
+  },
+  {
+    "user": "and you list some linux commands",
+    "assistant": "Here are some simple Linux commands:\n1. ls - list files in the current directory\n2. cd <directory> - change directory\n3. pwd - show current directory path\n4. mkdir <name> - create a new directory\n5. touch <file> - create a new empty file\n6. rm <file> - remove a file\n7. cp <source> <dest> - copy files or directories\n8. mv <source> <dest> - move/rename files or directories\n9. cat <file> - display file content\n10. echo <text> - print text to terminal\n11. man <command> - show the manual/help for a command\n12. top - display running processes\n13. df - show disk usage\n14. free - show memory usage\n15. uname -a - system info"
+  },
+  {
+    "user": "thank you",
+    "assistant": "You\u2019re welcome! Happy to help \ud83d\ude0a"
+  },
+  {
+    "user": "roll a dice for me",
+    "assistant": "You rolled a 3!"
+  },
+  {
+    "user": "i found a coin on the ground and i flip it",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "coin flip",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "im so happy",
+    "assistant": "That\u2019s awesome! Keep the good vibes going \ud83d\ude0a"
+  },
+  {
+    "user": "you too",
+    "assistant": "Got it! Anything else you want to share?"
+  },
+  {
+    "user": "no",
+    "assistant": "Interesting\u2026 keep going!"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hi there! What\u2019s up?"
+  },
+  {
+    "user": "how are you",
+    "assistant": "I'm great, thanks for asking! How about you today?"
+  },
+  {
+    "user": "im great thank you",
+    "assistant": "You\u2019re welcome! Happy to help \ud83d\ude0a"
+  },
+  {
+    "user": "can you tell me the time and date",
+    "assistant": "The current time is 20:53:05. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "can you roll a dice",
+    "assistant": "You rolled a 3!"
+  },
+  {
+    "user": "can you flip a coin",
+    "assistant": "Tails!"
+  },
+  {
+    "user": "who is elon",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "exit",
+    "assistant": "Interesting\u2026 keep going!"
+  },
+  {
+    "user": "exit",
+    "assistant": "Got it! Anything else you want to share?"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hello! Always nice to see you."
+  },
+  {
+    "user": "exit",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "exit",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hey! How\u2019s it going?"
+  },
+  {
+    "user": "exit",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "hello how are you",
+    "assistant": "Hello! Always nice to see you."
+  },
+  {
+    "user": "im great what about you",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "can you tell me the time and date",
+    "assistant": "The current time is 21:12:14. Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "can you flip a coin",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hi there! What\u2019s up?"
+  },
+  {
+    "user": "exit",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "exit",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "exit",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hey! How\u2019s it going?"
+  },
+  {
+    "user": "im good how about you",
+    "assistant": "I see. What else is happening?"
+  },
+  {
+    "user": "exit",
+    "assistant": "Hmm\u2026 tell me more, I\u2019m all ears!"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hello! Always good to see you."
+  },
+  {
+    "user": "how are you",
+    "assistant": "Interesting\u2026 tell me more!"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hey there! How\u2019s it going?"
+  },
+  {
+    "user": "how are you",
+    "assistant": "Feeling awesome! What about you?"
+  },
+  {
+    "user": "im great can you tell me the time and date",
+    "assistant": "The current time is 21:51:08."
+  },
+  {
+    "user": "thank you",
+    "assistant": "No problem at all!"
+  },
+  {
+    "user": "date",
+    "assistant": "Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "hello",
+    "assistant": "Hey there! How\u2019s it going?"
+  },
+  {
+    "user": "how are you",
+    "assistant": "I'm doing great! How about you?"
+  },
+  {
+    "user": "im great can you tell me the time and date",
+    "assistant": "The current time is 22:02:21."
+  },
+  {
+    "user": "ok great",
+    "assistant": "I see, what else is happening?"
+  },
+  {
+    "user": "can you flip a coin",
+    "assistant": "Interesting\u2026 tell me more!"
+  },
+  {
+    "user": "flip a coin",
+    "assistant": "I\u2019m listening, go on."
+  },
+  {
+    "user": "can your roll a dice",
+    "assistant": "I see, what else is happening?"
+  },
+  {
+    "user": "roll a dice",
+    "assistant": "You rolled a 6"
+  },
+  {
+    "user": "hey",
+    "assistant": "Hello! How\u2019s your day?"
+  },
+  {
+    "user": "how are you",
+    "assistant": "All good here. How\u2019s your day?"
+  },
+  {
+    "user": "im great can you tell me the time",
+    "assistant": "The current time is 22:06:00."
+  },
+  {
+    "user": "date",
+    "assistant": "Today is Saturday, February 14, 2026."
+  },
+  {
+    "user": "can you flip a coin for me",
+    "assistant": "Tails"
+  },
+  {
+    "user": "linux commands",
+    "assistant": "Tip: 'man command' shows the manual for any Linux command."
+  },
+  {
+    "user": "man command",
+    "assistant": "I\u2019m listening, go on."
+  },
+  {
+    "user": "Linux comman",
+    "assistant": "Interesting\u2026 tell me more!"
+  },
+  {
+    "user": "linux",
+    "assistant": "I\u2019m listening, go on."
+  },
+  {
+    "user": "Linux commands",
+    "assistant": "'sudo' gives admin privileges. Use wisely!"
+  },
+  {
+    "user": "Linux commands",
+    "assistant": "Basic Linux commands: ls, cd, pwd, mkdir, rm, cp, mv"
+  },
+  {
+    "user": "Linux commands",
+    "assistant": "Basic Linux commands: ls, cd, pwd, mkdir, rm, cp, mv"
+  },
+  {
+    "user": "exo",
+    "assistant": "Interesting\u2026 tell me more!"
+  },
+  {
+    "user": "exot",
+    "assistant": "I\u2019m listening, go on."
+  },
+  {
+    "user": "eexit",
+    "assistant": "Interesting\u2026 tell me more!"
+  },
+  {
+    "user": "hello",
+    "assistant": "Hi! Nice to see you."
+  },
+  {
+    "user": "you too how are you",
+    "assistant": "I'm doing great! How about you?"
+  },
+  {
+    "user": "im good whats the time",
+    "assistant": "The current time is 22:09:26."
+  },
+  {
+    "user": "flip a coin",
+    "assistant": "Heads"
+  },
+  {
+    "user": "roll a dice",
+    "assistant": "You rolled a 5"
+  },
+  {
+    "user": "4+$",
+    "assistant": "Hmm\u2026 that math didn\u2019t work \ud83d\ude05"
+  },
+  {
+    "user": "4+4",
+    "assistant": "Hmm\u2026 that math didn\u2019t work \ud83d\ude05"
+  },
+  {
+    "user": "5+5",
+    "assistant": "Hmm\u2026 that math didn\u2019t work \ud83d\ude05"
+  }
+]
