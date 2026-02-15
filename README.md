@@ -52,8 +52,3 @@ After running VEO-GPTx in your terminal, you can interact with it like this:
 > hello
 VEO-GPTx: Hi there! How can I assist you today?
 
-## Screenshot
-
-VEO-GPTx running in offline mode:
-
-![VEO-GPTx Terminal Screenshot](https://i.postimg.cc/jjQZrYMT/Untitled.png)
