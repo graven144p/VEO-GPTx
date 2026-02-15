@@ -52,5 +52,4 @@ After running VEO-GPTx in your terminal, you can interact with it like this:
 VEO-GPTx: Hi there! How can I assist you today?
 
 
-├─ README.md
-├─ requirements.txt
+
