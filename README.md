@@ -3,6 +3,10 @@
 ![VEO-GPTx Logo](https://i.postimg.cc/jdgcshH3/logo.webp)
 
 
+![VEO-GPTx ](https://postimg.cc/rRqZx4Wd)
+
+
+
 
 VEO-GPTx is a personalized AI assistant designed to run directly in a Linux terminal, leveraging the ollama API for real-time interaction. It emphasizes **simplicity, speed, and flexibility**, making it ideal for developers, system administrators, and tech enthusiasts who want AI support without leaving the command line.  
 
