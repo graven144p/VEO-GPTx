@@ -3,7 +3,7 @@
 ![VEO-GPTx Logo](https://i.postimg.cc/jdgcshH3/logo.webp)
 
 
-![VEO-GPTx ](https://i.postimg.cc/kGSrrFgy/Untitled.png)
+![VEO-GPTx ](https://i.postimg.cc/CLDgCKFd/Untitled.png)
 
 
 
