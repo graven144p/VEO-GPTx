@@ -44,11 +44,8 @@ python3 --version
 curl -fsSL https://ollama.com/install.sh | sh
 
 
-ollama pull llama3
-ollama pull llama3:8b-instruct-q4_K_M
+ollama pull gemma:2b
 
-
-ollama run llama3
 
 
 
