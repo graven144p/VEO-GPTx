@@ -3,7 +3,7 @@
 ![VEO-x Logo](https://i.postimg.cc/jdgcshH3/logo.webp)
 
 
-![VEO-Tx ](https://i.postimg.cc/CLDgCKFd/Untitled.png)
+![VEO-Tx ](https://i.postimg.cc/26jd0j08/Untitled.png)
 
 
 
