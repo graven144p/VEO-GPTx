@@ -26,9 +26,8 @@ banner = r"""
                                                   xxxxxxxxxxx+xx
                                                      xxxxxxx
 
-                                                     VEO-GPTx
+                                                     VEO-x
 """
-
 print(banner)
 
 # -------------------------------
@@ -37,11 +36,14 @@ print(banner)
 
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "gemma:2b"
-MEMORY_DIR = os.path.expanduser("~/VEO-GPTx/Memory")
+NUM_CTX = 1024
+NUM_THREADS = os.cpu_count() or 4
+
+MEMORY_DIR = os.path.expanduser("~/VEO-x/Memory")
 MEMORY_FILE = os.path.join(MEMORY_DIR, "veo_memory.json")
 
 # -------------------------------
-# MEMORY
+# MEMORY SYSTEM
 # -------------------------------
 
 os.makedirs(MEMORY_DIR, exist_ok=True)
@@ -57,7 +59,7 @@ else:
 
 def save_memory():
     with open(MEMORY_FILE, "w") as f:
-        json.dump(memory, f, indent=2)
+        json.dump(memory[-50:], f, indent=2)
 
 # -------------------------------
 # UTILITIES
@@ -65,12 +67,6 @@ def save_memory():
 
 def normalize(text):
     return re.sub(r"[^\w\s]", "", text.lower())
-
-def type_out(text, delay=0.01):
-    for char in text:
-        print(char, end="", flush=True)
-        time.sleep(delay)
-    print()
 
 # -------------------------------
 # SAFE MATH
@@ -86,9 +82,10 @@ SAFE_OPERATORS = {
 }
 
 def safe_eval(expr):
+
     def eval_node(node):
-        if isinstance(node, ast.Num):
-            return node.n
+        if isinstance(node, (ast.Num, ast.Constant)):
+            return node.n if hasattr(node, "n") else node.value
         elif isinstance(node, ast.BinOp):
             return SAFE_OPERATORS[type(node.op)](
                 eval_node(node.left),
@@ -105,34 +102,28 @@ def safe_eval(expr):
     return eval_node(tree.body)
 
 # -------------------------------
-# OLLAMA CHECK
-# -------------------------------
-
-def ollama_available():
-    try:
-        r = requests.get(f"{OLLAMA_URL}/api/tags", timeout=2)
-        return r.status_code == 200
-    except:
-        return False
-
-# -------------------------------
-# OLLAMA BRAIN
+# OLLAMA BRAIN (Optimized)
 # -------------------------------
 
 def ask_ollama(prompt):
 
-    if not ollama_available():
-        return None
-
     try:
-        conversation = ""
+        context = ""
         for mem in memory[-3:]:
-            conversation += f"User: {mem['user']}\nAssistant: {mem['assistant']}\n"
+            if "cannot" in mem["assistant"].lower():
+                continue
+            context += f"User: {mem['user']}\nAssistant: {mem['assistant']}\n"
 
-        full_prompt = f"""You are VEO-GPT, a helpful and conversational AI assistant.
-Respond naturally and directly.
+        system_prompt = """You are VEO-x.
 
-{conversation}
+Provide neutral, factual, direct answers.
+Do not refuse harmless informational questions.
+Be concise.
+"""
+
+        full_prompt = f"""{system_prompt}
+
+{context}
 User: {prompt}
 Assistant:"""
 
@@ -141,11 +132,15 @@ Assistant:"""
             "prompt": full_prompt,
             "stream": True,
             "options": {
-                "temperature": 0.6,
+                "temperature": 0.2,
                 "top_p": 0.9,
-                "repeat_penalty": 1.1
+                "repeat_penalty": 1.1,
+                "num_ctx": NUM_CTX,
+                "num_thread": NUM_THREADS
             }
         }
+
+        start_time = time.time()
 
         response = requests.post(
             f"{OLLAMA_URL}/api/generate",
@@ -156,21 +151,27 @@ Assistant:"""
 
         response.raise_for_status()
 
+        print("VEO-x: ", end="", flush=True)
         full_reply = ""
-        print("VEO-GPT: ", end="", flush=True)
 
         for line in response.iter_lines():
             if line:
-                data = json.loads(line.decode())
+                try:
+                    data = json.loads(line.decode())
+                except json.JSONDecodeError:
+                    continue
+
                 chunk = data.get("response", "")
                 print(chunk, end="", flush=True)
                 full_reply += chunk
 
-        print("\n")
+        duration = time.time() - start_time
+        print(f"\n\n[Generated in {duration:.2f}s]\n")
+
         return full_reply.strip()
 
-    except:
-        print("\n[Ollama Error]\n")
+    except Exception as e:
+        print(f"\n[Ollama Error: {e}]\n")
         return None
 
 # -------------------------------
@@ -188,17 +189,22 @@ def offline_brain(user_input):
         except:
             return "Math error."
 
-    elif "time" in user:
+    if re.search(r"\btime\b", user):
         return f"The time is {datetime.now().strftime('%H:%M:%S')}."
 
-    elif "date" in user:
+    if re.search(r"\bdate\b", user):
         return f"Today is {datetime.now().strftime('%A, %B %d, %Y')}."
 
-    elif user in ["hi", "hello", "hey"]:
+    if "eggs" in user and "cake" in user:
+        return "Most cake recipes use 2 to 3 eggs."
+
+    if "linux" in user and "command" in user:
+        return "Common Linux commands: ls, cd, pwd, mkdir, rm, cp, mv, grep, cat, nano."
+
+    if user in ["hi", "hello", "hey"]:
         return "Hey there."
 
-    else:
-        return "Offline mode active."
+    return "Offline mode active."
 
 # -------------------------------
 # ROUTER
@@ -223,9 +229,11 @@ def process_input(user_input):
 # -------------------------------
 
 current_date = datetime.now().strftime('%A, %B %d, %Y')
+
 print(
-    f"{'Ollama Connected' if ollama_available() else 'Offline Mode'} | "
-    f"Model: {OLLAMA_MODEL}\n"
+    f"Ollama Model: {OLLAMA_MODEL}\n"
+    f"CPU Threads: {NUM_THREADS}\n"
+    f"Context Size: {NUM_CTX}\n"
     f"Memory Loaded | {current_date}\n"
 )
 
@@ -236,16 +244,16 @@ print(
 start_time = time.time()
 
 while True:
+
     user_input = input("You: ").strip()
 
     if user_input.lower() in ["exit", "quit", "bye"]:
-        print("VEO-GPT: Goodbye.")
+        print("VEO-x: Goodbye.")
         break
 
     if user_input.startswith("/status"):
         uptime = int(time.time() - start_time)
-        brain = "Gemma 2B (Ollama)" if ollama_available() else "Offline Brain"
-        print(f"VEO-GPT: Brain: {brain} | Model: {OLLAMA_MODEL} | Uptime: {uptime}s")
+        print(f"VEO-x: Model: {OLLAMA_MODEL} | Threads: {NUM_THREADS} | Uptime: {uptime}s")
         continue
 
     if user_input.startswith("/model"):
@@ -260,4 +268,4 @@ while True:
     response = process_input(user_input)
 
     if response:
-        type_out("VEO-GPT: " + response)
+        print("VEO-x: " + response)
