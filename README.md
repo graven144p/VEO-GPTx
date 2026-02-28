@@ -1,6 +1,6 @@
 # VEO-x
 
-![VEO-x Logo](https://i.postimg.cc/jdgcshH3/logo.webp)
+![VEO-x Logo](https://i.postimg.cc/g0mT8Z6H/IMG-1199.webp)
 
 
 ![VEO-Tx ](https://i.postimg.cc/26jd0j08/Untitled.png)
